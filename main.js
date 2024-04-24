@@ -1,6 +1,12 @@
 // Funtion to play the respective sound of the key
 function play(idElementAudio){
-   document.querySelector(idElementAudio).play();
+    const elementAudio = document.querySelector(idElementAudio);
+    console.log(elementAudio.localName);
+    if(elementAudio != null && elementAudio.localName === "audio"){
+        elementAudio.play();
+    }else{
+        console.log("Element not found or invalid selector!")
+    }
 }
 
 // List of keys on Alura MI
@@ -19,11 +25,15 @@ for(let cont =0 ; cont < keysList.length ; cont++ ){
         play(idAudio);
     }
     
-    key.onkeydown = function(){
-        key.classList.add('ativa');
-    }
+    key.onkeydown = function(event){
+        if(event.code === "Space" || event.code === "Enter"){
+            key.classList.add('ativa');
+        }
+    }   
     
-    key.onkeyup = function(){
-        key.classList.remove('ativa');      
+    key.onkeyup = function(event){
+        if(event.code === "Space" || event.code === "Enter"){
+            key.classList.remove('ativa');      
+        }
     }
 }
